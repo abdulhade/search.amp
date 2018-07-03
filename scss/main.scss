@@ -1,0 +1,89 @@
+/*======================================
+Cores Utilizadas
+Azul: 0164bf 90%, selects: 004987, 10%
+Verde: 79ba25 90%
+Laranja: ef6600, 10%
+======================================*/
+$blue-color:  #0164bf;
+$blue-color-opacity: rgba(1,100,191,.9);
+$green-color: #79ba25;
+$orange-color: #ef6600;
+$white-color: #fff;
+
+body {
+  background-image: url(../assets/background-2.jpg);
+  background-size: cover;
+}
+
+// Search
+
+.search {
+  margin: 60px auto 30px;
+  max-width: 980px;
+
+  &__tab {
+    background: $blue-color-opacity;
+    border-radius: 3px 3px 0 0;
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      a {
+        color: $white-color;
+        display: block;
+        font-size: 20px;
+        padding: 10px 30px;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__container {
+    background: $blue-color-opacity;
+    border-radius: 0 3px 0 0;
+    padding: 20px 35px;
+    position: relative;
+
+    &__selo {
+      top: 15px;
+      right: 40px;
+      position: absolute;
+    }
+  }
+
+  &__group {
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+
+    &__form {
+      .section {
+        &__title {
+          display: block;
+          font-size: 28px;
+          margin: 0 0 20px;
+        }
+      }
+    }
+  }
+
+  &__button {
+    &__submit {
+      background: rgba(121, 186, 37, .9);
+      border: none;
+      border-radius: 0 0 3px 3px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      width: 100%;
+      &:hover {
+        background: rgba(121, 186, 37, 1);
+      }
+    }
+  }
+}
