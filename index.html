@@ -8,6 +8,7 @@
     <meta name="author" content="Viajanet">
 
     <link rel="stylesheet" href="css/main.css">
+    <link type="image/x-icon" rel="shortcut icon" href="https://www.viajanet.com.br/static/assets/companies/ViajaNet/img/favicon.ico">
   </head>
   <body>
 
@@ -21,11 +22,11 @@
         <img class="search__container__selo" alt="Selo de Garantia" src="https://www.viajanet.com.br/static/assets/platform/img/economia.png">
 
         <fieldset class="search__group">
-          <form class="search__group__form" action="index.html">
+          <form class="search__group__form" action="index.html" method="post">
             <div class="section">
               <strong class="section__title">Encontre os melhores preços e boa viagem!</strong>
               <label class="section__lbl">
-                <input type="radio" tabindex="1" name="triptype" class="section__lbl__radio-option" id="iptRoundTrip" value="1">
+                <input type="radio" tabindex="1" name="triptype" class="section__lbl__radio-option" id="iptRoundTrip" required>
                 <span>Ida e Volta</span>
               </label>
 
@@ -42,32 +43,37 @@
                     <input name="inptdestination" id="inptdestination" tabindex="3" type="text" required="" placeholder="Cidade ou aeroporto" maxlength="500">
                   </label>
                 </div>
-                <div class="travel__date-outbound">
-                  <label>
-                    <span>Data de Ida</span>
-                    <input name="departureDate" id="departureDate" tabindex="4" type="text" required="" placeholder="Data de Ida" maxlength="500">
-                  </label>
+                <div class="travel__date">
+                  <div class="travel__date--outbound">
+                    <label>
+                      <span>Data de Ida</span>
+                      <input name="departureDate" id="departureDate" tabindex="4" type="text" required placeholder="Data de Ida" maxlength="500">
+                    </label>
+                  </div>
+
+                  <div class="travel__date--inbound">
+                    <label>
+                      <span>Data de Volta</span>
+                      <input name="arrivalDate" id="arrivalDate" tabindex="5" type="text" required placeholder="Data de Volta" maxlength="500">
+                    </label>
+                  </div>
                 </div>
-                <div class="travel__date-inbound">
-                  <label>
-                    <span>Data de Volta</span>
-                    <input name="arrivalDate" id="arrivalDate" tabindex="5" type="text" required="" placeholder="Data de Volta" maxlength="500">
-                  </label>
-                </div>
+
                 <div class="travel__people">
                   <label class="travel__people__adults">
                     <span>Adultos</span>
-                    <select id="drpAdultsQtd" name="adultPassenger" tabindex="6" required="">
+                    <select id="drpAdultsQtd" name="adultPassenger" tabindex="6" required>
                       <option value="">1 adulto</option>
                       <option value="">2 adultos</option>
                       <option value="">3 adultos</option>
                       <option value="">4 adultos</option>
                       <option value="">5 adultos</option>
                     </select>
+                    <small>.</small>
                   </label>
                   <label class="travel__people__children">
                     <span>Crianças</span>
-                    <select id="drpChildrenQtd" name="childPassenger" tabindex="7" required="">
+                    <select id="drpChildrenQtd" name="childPassenger" tabindex="7" required>
                       <option value="">Nenhuma</option>
                       <option value="">1 criança</option>
                       <option value="">2 crianças</option>
@@ -78,12 +84,12 @@
                   </label>
                   <label class="travel__people__babies">
                     <span>Bebês</span>
-                    <select id="drpBabiesQtd" name="infantPassenger" tabindex="8" required="">
+                    <select id="drpBabiesQtd" name="infantPassenger" tabindex="8" required>
                       <option value="">Nenhum</option>
-                      <option value="">1 adulto</option>
-                      <option value="">2 adultos</option>
-                      <option value="">3 adultos</option>
-                      <option value="">4 adultos</option>
+                      <option value="">1 bebê</option>
+                      <option value="">2 bebês</option>
+                      <option value="">3 bebês</option>
+                      <option value="">4 bebês</option>
                     </select>
                     <small>0 a 23 meses</small>
                   </label>

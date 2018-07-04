@@ -1,11 +1,6 @@
-/*======================================
-Cores Utilizadas
-Azul: 0164bf 90%, selects: 004987, 10%
-Verde: 79ba25 90%
-Laranja: ef6600, 10%
-======================================*/
 $blue-color:  #0164bf;
-$blue-color-opacity: rgba(1,100,191,.9);
+$opacity-blue-color: rgba(1,100,191,.9);
+$dark-blue-color: #004987;
 $green-color: #79ba25;
 $orange-color: #ef6600;
 $white-color: #fff;
@@ -22,12 +17,17 @@ body {
   max-width: 980px;
 
   &__tab {
-    background: $blue-color-opacity;
+    background: $opacity-blue-color;
     border-radius: 3px 3px 0 0;
     display: inline-block;
     list-style: none;
     margin: 0;
     padding: 0;
+    @media screen and (max-width: 767px) {
+      background: $dark-blue-color;
+      text-align: center;
+      width: 100%;
+    }
 
     li {
       a {
@@ -41,15 +41,22 @@ body {
   }
 
   &__container {
-    background: $blue-color-opacity;
+    background: $opacity-blue-color;
     border-radius: 0 3px 0 0;
     padding: 20px 35px;
     position: relative;
+    @media screen and (max-width: 767px) {
+      padding: 10px;
+      border-radius: 0;
+    }
 
     &__selo {
       top: 15px;
       right: 40px;
       position: absolute;
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
     }
   }
 
@@ -65,6 +72,156 @@ body {
           display: block;
           font-size: 28px;
           margin: 0 0 20px;
+          @media screen and (max-width: 767px) {
+            display: none;
+          }
+        }
+
+        &__lbl {
+          display: block;
+          margin-bottom: 15px;
+
+          &__radio-option {
+            margin: 0 5px 0 0;
+          }
+        }
+
+        .travel {
+          &__origin, &__destination {
+            display: inline-block;
+            float: left;
+            width: 49%;
+            @media screen and (max-width: 767px) {
+              width: 100%;
+            }
+
+            label {
+              display: inline-block;
+              margin-bottom: 10px;
+              width: 100%;
+              span {
+                display: block;
+                margin-bottom: 6px;
+              }
+              input {
+                background: $white-color;
+                border: 1px solid #e1e1e1;
+                border-radius: 3px;
+                color: $blue-color;
+                font-size: 13px;
+                font-weight: bold;
+                outline: 0;
+                padding: 12px;
+                width: -webkit-fill-available;
+              }
+            }
+          }
+
+          &__destination {
+            margin-left: 2%;
+            @media screen and (max-width: 767px) {
+              margin-left: 0;
+            }
+          }
+
+          &__date {
+            display: inline-block;
+            float: left;
+            width: 49%;
+            @media screen and (max-width: 767px) {
+              width: 100%;
+            }
+
+            &--outbound, &--inbound {
+              display: inline-block;
+              float: left;
+              width: 48%;
+              label {
+                display: inline-block;
+                margin-bottom: 10px;
+                width: 100%;
+                span {
+                  display: block;
+                  margin-bottom: 6px;
+                }
+                input {
+                  background: $white-color;
+                  border: 1px solid #e1e1e1;
+                  border-radius: 3px;
+                  color: $blue-color;
+                  font-size: 13px;
+                  font-weight: bold;
+                  outline: 0;
+                  padding: 12px;
+                  width: -webkit-fill-available;
+                }
+              }
+            }
+
+            &--inbound {
+              margin-left: 4%;
+            }
+          }
+
+          &__people {
+            display: inline-block;
+            float: left;
+            margin-left: 2%;
+            width: 49%;
+            @media screen and (max-width: 767px) {
+              margin-left: 0;
+              width: 100%;
+            }
+
+            label {
+              display: inline-block;
+              height: 76px;
+              width: 30%;
+              @media screen and (max-width: 767px) {
+                width: 31%;
+              }
+
+              span {
+                display: block;
+                margin-bottom: 6px;
+              }
+              select {
+                background: $dark-blue-color;
+                border: 2px solid $dark-blue-color;
+                border-radius: 3px;
+                color: $white-color;
+                font-size: 13px;
+                font-weight: bold;
+                outline: 0;
+                padding: 10px 6px;
+                width: 100%;
+                @media screen and (max-width: 767px) {
+                  font-size: 11px;
+                }
+
+                &:active, &:focus {
+                  border: 2px solid $orange-color;
+                }
+              }
+              small {
+                display: block;
+                margin-top: 5px;
+              }
+            }
+
+            &__adults {
+              small {
+                color: rgba(0,0,0,0);
+              }
+            }
+
+            &__children, &__babies {
+              margin-left: 2.5%;
+              @media screen and (max-width: 767px) {
+                margin-left: 2%;
+              }
+            }
+          }
         }
       }
     }
@@ -83,6 +240,10 @@ body {
       width: 100%;
       &:hover {
         background: rgba(121, 186, 37, 1);
+      }
+
+      &:active, &:focus {
+        outline: none;
       }
     }
   }
