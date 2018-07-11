@@ -8,16 +8,34 @@ $white-color: #fff;
 body {
   background-image: url(../assets/background-2.jpg);
   background-size: cover;
+  margin: 0;
   @media screen and (max-width: 767px) {
     background-size: inherit;
   }
 }
 
-// Search
+//Header
+.header {
+  background: $white-color;
+  box-shadow: 0 0 3px rgba(0,0,0,.2);
+  height: 60px;
+  text-align: center;
+  width: 100%;
 
+  .logo {
+    margin-top: 10px;
+  }
+}
+
+//Search
 .search {
-  margin: 60px auto 30px;
+  margin: 60px auto 60px;
   max-width: 980px;
+
+  @media screen and (max-width: 767px) {
+  margin: 30px auto 30px;
+   width: 98%;
+  }
 
   &__tab {
     background: $opacity-blue-color;
@@ -91,7 +109,6 @@ body {
 
         .travel {
           &__origin, &__destination {
-            display: inline-block;
             float: left;
             width: 49%;
             @media screen and (max-width: 767px) {
@@ -128,7 +145,6 @@ body {
           }
 
           &__date {
-            display: inline-block;
             float: left;
             width: 49%;
             @media screen and (max-width: 767px) {
@@ -136,7 +152,6 @@ body {
             }
 
             &--outbound, &--inbound {
-              display: inline-block;
               float: left;
               width: 48%;
               label {
@@ -167,7 +182,6 @@ body {
           }
 
           &__people {
-            display: inline-block;
             float: left;
             margin-left: 2%;
             width: 49%;
@@ -248,6 +262,60 @@ body {
       &:active, &:focus {
         outline: none;
       }
+    }
+  }
+}
+
+//Banner
+.banner {
+  margin-bottom: 30px;
+  &__content {
+    margin: 0 auto;
+    max-width: 980px;
+
+    @media screen and (max-width: 767px) {
+      max-width: 300px;
+    }
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+
+    &__img {
+      background: #440095;
+      border: 1px solid #ededed;
+      border-radius: 2px;
+      color: #fff;
+      display: block;
+      height: 90px;
+      margin: 0 auto;
+      width: 728px;
+
+      @media screen and (max-width: 767px) {
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+//Footer
+.footer {
+  background: #f7f7f7;
+  display: inline-block;
+  height: 50px;
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  .copy {
+    color: #858585;
+    display: block;
+    font-size: 13px;
+    margin: 16px 0;
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      margin: 19px 0;
     }
   }
 }
