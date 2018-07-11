@@ -49,6 +49,12 @@
                 color: #7d7d7d;
                 background: #ebebeb;
                 top: 40px;
+                padding: 0px 23px;
+                margin-left: -10px;
+            }
+
+            .i-amphtml-default-week-day-format .DayPicker_weekHeader li {
+                font-weight: bold;
             }
 
             .amp-date-picker-resize-bug .DayPicker_transitionContainer {
@@ -164,10 +170,11 @@
                                             AMP.setState({
                                                 dates: event.dates,
                                                 startDate: event.start,
-                                                endDate: event.end
+                                                endDate: event.end,
                                             })" 
                                         format="DD/MM/YYYY" 
-                                        open-after-select min="2017-10-26" 
+                                        open-after-select 
+                                        min="2018-07-10" 
                                         start-input-selector="#range-start" 
                                         end-input-selector="#range-end"
                                         locale="pt-br"
