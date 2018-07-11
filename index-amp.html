@@ -32,20 +32,19 @@
         <li> <a href="#" class="search__tab__btn"> <span>Passagens Aéreas</span> </a> </li>
       </ul>
 
-      <div class="search__container">
+      <div class="search__container"  on="tap:AMP.setState({showDropdown:false})" role="button" tabindex="0">
         <amp-img class="search__container__selo"  width="900"  height="675"  layout="responsive" alt="Selo de Garantia" src="https://www.viajanet.com.br/static/assets/platform/img/economia.png"></amp-img>
 
         <fieldset class="search__group">
           <form class="search__group__form" 
-          method="post"
-          action-xhr="https://www.viajanet.com.br"
+          method="POST"
+          action-xhr="https://plataforma.homolog.viajanet.com.br/resources/api/autocompletelite/"
           target="_blank"
           id="search-form"
           on="
             submit: autosuggest-list.hide;
             submit-success: autosuggest-list.hide;
-            submit-error: autosuggest-list.hide"
-        >
+            submit-error: autosuggest-list.hide">
             <div class="section">
               <strong class="section__title">Encontre os melhores preços e boa viagem!</strong>
               <label class="section__lbl">
@@ -57,8 +56,72 @@
                 <div class="travel__origin">
                   <label>
                     <span>Origem</span>
-                    <input name="inptorigin" id="inptorigin" tabindex="2" type="text" required="" placeholder="Cidade ou aeroporto" maxlength="500">
+                    <input name="inptorigin" id="inptorigin"
+                    on="
+                    input-debounced:
+                      AMP.setState({
+                        query: event.value,
+                        showDropdown: event.value,
+                      }),
+                      autosuggest-list.show;
+                    tap:
+                      AMP.setState({
+                        query: query == null ? '' : query,
+                        showDropdown: 'true'
+                      }),
+                      autosuggest-list.show"
+                  [value]="query || ''"
+                  value="" required autocomplete="off" tabindex="2" type="text" placeholder="Cidade ou aeroporto" maxlength="500">
                   </label>
+                  <div class="suggest">
+                    <div
+                    class="autosuggest-container hidden"
+                    [class]="(showDropdown && query) ?
+                      'autosuggest-container' :
+                      'autosuggest-container hidden'"
+                  >
+                    <amp-list
+                      class="autosuggest-box"
+                      layout="fixed-height"
+                      height="120"
+                      src="/resources/api/autocompletelite"
+                      [src]="query ?
+                        autosuggest.endpoint + query :
+                        autosuggest.emptyAndInitialTemplateJson"
+                      id="autosuggest-list"
+                    >
+                      <template type="amp-mustache">
+                        <amp-selector
+                          id="autosuggest-selector"
+                          keyboard-select-mode="focus"
+                          layout="container"
+                          on="
+                            select:
+                              AMP.setState({
+                                query: event.targetOption,
+                                showDropdown: false
+                              }),
+                              autosuggest-list.hide"
+                        >
+                          {{#results}}
+                            <div
+                              class="select-option no-outline"
+                              role="option"
+                              tabindex="0"
+                              on="tap:autosuggest-list.hide"
+                              option="{{.}}"
+                            >{{.}}</div>
+                          {{/results}}
+                          {{^results}}
+                            <div class="select-option {{#query}}empty{{/query}}">
+                              {{#query}}Sorry! We don't ship to your city 😰{{/query}}
+                            </div>
+                          {{/results}}
+                        </amp-selector>
+                      </template>
+                    </amp-list>
+                  </div>
+                  </div>
                 </div>
                 <div class="travel__destination">
                   <label>
@@ -119,15 +182,38 @@
                 </div>
               </div>
             </div>
-          </amp-form>
+            <div submit-success>
+              <template type="amp-mustache">
+                {{result}}
+              </template>
+            </div>
+            <div submit-error>
+              <template type="amp-mustache">
+                {{#result}}{{result}}{{/result}}
+                {{^result}}Sorry! Something went wrong.{{/result}}
+              </template>
+            </div>
+          </form>
+
         </fieldset>
       </div>
-
       <div class="search__button">
         <button class="search__button__submit" type="button" name="button">Pesquisar</button>
       </div>
     </div>
     <!-- Close Search -->
-
+   
+   <!--  The initial state and helper variables are configured by amp-state.-->
+  <amp-state id="autosuggest">
+    <script type="application/json">
+    {
+      "endpoint": "/resources/api/autocompletelite/",
+      "emptyAndInitialTemplateJson": [{
+        "query": "",
+        "results": []
+      }]
+    }
+    </script>
+  </amp-state>
   </body>
 </html>
