@@ -81,38 +81,45 @@
                                      input-debounced:
                                        AMP.setState({
                                          queryOrigin: event.value,
-                                         showDropdown: event.value,
+                                         showDropdown_origin: false,
+                                         showDropdown_destination: false
                                        }),
-                                       autosuggest-list.show;"
-                                   [value]="queryOrigin.Value || ''"
-                                   value=""
+                                       autosuggest-list.show;
+                                       tap:
+                                       AMP.setState({
+                                        showDropdown_origin: false,
+                                        showDropdown_destination: false
+                                       }),
+                                       autosuggest-list.show"
+                                   [value]="origin_text || ''"
                                    required
                                    autocomplete="off" />
                                 </label>
                                 <div class="suggest">
-                                    <div class="autosuggest-container hidden" [class]="(showDropdown && queryOrigin) ?
+                                    <div class="autosuggest-container hidden" [class]="(showDropdown_origin === true) ?
                                         'autosuggest-container' :
                                         'autosuggest-container hidden'">
                                         <amp-list class="autosuggest-box" layout="fixed-height" height="120" [src]="queryOrigin ?
                                             autosuggest.endpoint + queryOrigin : return" id="autosuggest-list"
-                                            single-item
-                                            items=".">
+                                            items="Locations">
                                             <template type="amp-mustache">
                                                 <amp-selector id="autosuggest-selector" keyboard-select-mode="focus" layout="container" on="
                                                     select:
                                                     AMP.setState({
-                                                        queryOrigin: event.targetOption,
-                                                        showDropdown: false
+                                                        origin_text: event.targetOption.split('|')[1],
+                                                        origin_iata: event.targetOption.split('|')[0],
+                                                        showDropdown_origin: false,
+                                                        showDropdown_destination: false
                                                     }),
                                                     autosuggest-list.hide">
                                                     {{#.}}
-                                                    <span class="select-option no-outline" role="option" 
-                                                    tabindex="0" on="tap:autosuggest-list.hide" option="{{.}}">{{Value}}</span>
+                                                    <option class="select-option no-outline" role="option" 
+                                                    tabindex="0" on="tap:autosuggest-list.hide" option="{{IATA}}|{{Name}}">{{Name}}</option>
                                                     {{/.}}
                                                 </amp-selector>
                                             </template>
-                                            <div placeholder>Loading ...</div>
-                                            <div fallback>Failed to load data.</div>
+                                            <div placeholder>Carregando ...</div>
+                                            <div fallback>Falha ao carregar a lista.</div>
                                         </amp-list>
                                     </div>
                                 </div>
@@ -124,44 +131,47 @@
                                     input-debounced:
                                       AMP.setState({
                                         queryDestination: event.value,
-                                        showDropdown: event.value,
+                                        showDropdown_destination: false,
+                                        showDropdown_origin: false
                                       }),
                                       autosuggest-list.show;
-                                    tap:
+                                      tap:
                                       AMP.setState({
-                                        queryDestination: queryDestination == null ? '' : queryDestination,
-                                        showDropdown: 'true'
+                                       showDropdown_origin: false,
+                                       showDropdown_destination: false
                                       }),
                                       autosuggest-list.show"
-                                      [value]="destination ? destination : ''"
-                                  value=""
+                                  [value]="destination_text || ''"
                                   required
                                   autocomplete="off" />
                                 </label>
                                 <div class="suggest">
-                                        <div class="autosuggest-container hidden" [class]="(showDropdown && queryDestination) ?
-                                            'autosuggest-container' :
-                                            'autosuggest-container hidden'">
-                                            <amp-list class="autosuggest-box" layout="fixed-height" height="120"  [src]="queryDestination ?
-                                                autosuggest.endpoint + queryDestination : return " id="autosuggest-list"
-                                                single-item
-                                                items=".">
-                                                <template type="amp-mustache">
-                                                    <amp-selector id="autosuggest-selector" keyboard-select-mode="focus" layout="container" on="
-                                                        select:
-                                                        AMP.setState({
-                                                            destination: event.value,
-                                                            showDropdown: false
-                                                        }),
-                                                        autosuggest-list.hide">
-                                                        {{#.}}
-                                                        <div class="select-option no-outline" role="option" 
-                                                        tabindex="0" on="tap:autosuggest-list.hide" option="{{.}}">{{Value}}</div>
-                                                        {{/.}}
-                                                    </amp-selector>
-                                                </template>
-                                            </amp-list>
-                                        </div>
+                                        <div class="autosuggest-container hidden" [class]="(showDropdown_destination === true) ?
+                                        'autosuggest-container' :
+                                        'autosuggest-container hidden'">
+                                        <amp-list class="autosuggest-box" layout="fixed-height" height="120" [src]="queryDestination ?
+                                            autosuggest.endpoint + queryDestination : return" id="autosuggest-list"
+                                            items="Locations">
+                                            <template type="amp-mustache">
+                                                <amp-selector id="autosuggest-selector" keyboard-select-mode="focus" layout="container" on="
+                                                    select:
+                                                    AMP.setState({
+                                                        destination_text: event.targetOption.split('|')[1],
+                                                        destination_iata: event.targetOption.split('|')[0],
+                                                        showDropdown_destination: false,
+                                                        showDropdown_origin: false
+                                                    }),
+                                                    autosuggest-list.hide">
+                                                    {{#.}}
+                                                    <option class="select-option no-outline" role="option" 
+                                                    tabindex="0" on="tap:autosuggest-list.hide" option="{{IATA}}|{{Name}}">{{Name}}</option>
+                                                    {{/.}}
+                                                </amp-selector>
+                                            </template>                                           
+                                            <div placeholder>Carregando ...</div>
+                                            <div fallback>Falha ao carregar a lista.</div>
+                                        </amp-list>
+                                    </div>
                                     </div>
                             </div>
                             <div class="travel__date">
@@ -237,7 +247,6 @@
             </fieldset>
         </div>
         <div class="search__button">
-            <p [text]="queryOrigin + '/' + queryDestination">This is a dog.</p>
             <a class="search__button__submit" [href]="destination_text" name="button">Pesquisar</a>
         </div>
     </div>
@@ -264,7 +273,7 @@
     <amp-state id="autosuggest">
         <script type="application/json">
             {
-            "endpoint": "/resources/api/autocompletelite/",
+            "endpoint": "/resources/api/autocomplete/",
             "emptyAndInitialTemplateJson": [{
                 "query": "",
                 "results": []
