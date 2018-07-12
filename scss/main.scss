@@ -149,7 +149,7 @@ body {
               color: #055cb1;
               border-radius: 3px;
               padding: 10px 5px;
-              width: 94%;
+              width: 97%;
               font-size: 11px;
 
               .select-option {
@@ -159,7 +159,7 @@ body {
                   background: rgba(1, 100, 191,.1);
                 }
               }
-              &.hidden {
+              &.hidden-origin, &.hidden-destination {
                 display: none;
               }
             }
