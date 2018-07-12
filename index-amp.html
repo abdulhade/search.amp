@@ -10,9 +10,7 @@
 
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-date-picker" src="https://cdn.ampproject.org/v0/amp-date-picker-0.1.js"></script>
-    <!-- First we include `amp-form`, which is required when using `<form>` elements in AMP documents. -->
-    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-    <!-- Next we include `amp-selector` to easily display results in an accessible list. -->
+        <!-- Next we include `amp-selector` to easily display results in an accessible list. -->
     <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
     <!-- Then we include `amp-list` to request and display the autosuggest results. -->
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
@@ -68,7 +66,7 @@
                     <div class="section">
                         <strong class="section__title">Encontre os melhores preços e boa viagem!</strong>
                         <label class="section__lbl">
-                            <input type="radio" tabindex="1" name="triptype" class="section__lbl__radio-option" id="iptRoundTrip" required>
+                            <input type="radio" tabindex="1" name="triptype" class="section__lbl__radio-option" id="iptRoundTrip" required value="1" checked="checked" >
                             <span>Ida e Volta</span>
                         </label>
 
@@ -180,7 +178,7 @@
                                                 dates: event.dates,
                                                 startDate: event.start,
                                                 endDate: event.end,
-                                            })" format="DD/MM/YYYY" 
+                                            })" format="DD-MM-YYYY" 
                                                 open-after-select 
                                                 min="2018-07-10" 
                                                 start-input-selector="#range-start"
@@ -190,14 +188,14 @@
                                     <div class="travel__date--outbound">
                                         <label>
                                             <span>Data de Ida</span>
-                                            <input class="border-none p0" id="range-start" placeholder="dd/mm/aaaa">
+                                            <input class="border-none p0" id="range-start" placeholder="dd-mm-aaaa">
                                         </label>
                                     </div>
 
                                     <div class="travel__date--inbound">
                                         <label>
                                             <span>Data de Volta</span>
-                                            <input class="border-none p0" id="range-end" placeholder="dd/mm/aaaa">
+                                            <input class="border-none p0" id="range-end" placeholder="dd-mm-aaaa">
                                         </label>
                                     </div>
                                 </amp-date-picker>
@@ -206,34 +204,34 @@
                             <div class="travel__people">
                                 <label class="travel__people__adults">
                                     <span>Adultos</span>
-                                    <select id="drpAdultsQtd" name="adultPassenger" tabindex="6" required>
-                                        <option value="">1 adulto</option>
-                                        <option value="">2 adultos</option>
-                                        <option value="">3 adultos</option>
-                                        <option value="">4 adultos</option>
-                                        <option value="">5 adultos</option>
+                                    <select id="drpAdultsQtd" name="adultPassenger" tabindex="6" required on="change:AMP.setState({adultPassenger: event.value})">
+                                        <option value="1">1 adulto</option>
+                                        <option value="2">2 adultos</option>
+                                        <option value="3">3 adultos</option>
+                                        <option value="4">4 adultos</option>
+                                        <option value="5">5 adultos</option>
                                     </select>
                                     <small>.</small>
                                 </label>
                                 <label class="travel__people__children">
                                     <span>Crianças</span>
-                                    <select id="drpChildrenQtd" name="childPassenger" tabindex="7" required>
-                                        <option value="">Nenhuma</option>
-                                        <option value="">1 criança</option>
-                                        <option value="">2 crianças</option>
-                                        <option value="">3 crianças</option>
-                                        <option value="">4 crianças</option>
+                                    <select id="drpChildrenQtd" name="childPassenger" tabindex="7" required on="change:AMP.setState({childPassenger: event.value})">
+                                        <option value="0">Nenhuma</option>
+                                        <option value="1">1 criança</option>
+                                        <option value="2">2 crianças</option>
+                                        <option value="3">3 crianças</option>
+                                        <option value="4">4 crianças</option>
                                     </select>
                                     <small>2 a 11 anos</small>
                                 </label>
                                 <label class="travel__people__babies">
                                     <span>Bebês</span>
-                                    <select id="drpBabiesQtd" name="infantPassenger" tabindex="8" required>
-                                        <option value="">Nenhum</option>
-                                        <option value="">1 bebê</option>
-                                        <option value="">2 bebês</option>
-                                        <option value="">3 bebês</option>
-                                        <option value="">4 bebês</option>
+                                    <select id="drpBabiesQtd" name="infantPassenger" tabindex="8" required on="change:AMP.setState({infantPassenger: event.value})">
+                                        <option value="0">Nenhum</option>
+                                        <option value="1">1 bebê</option>
+                                        <option value="2">2 bebês</option>
+                                        <option value="3">3 bebês</option>
+                                        <option value="4">4 bebês</option>
                                     </select>
                                     <small>0 a 23 meses</small>
                                 </label>
@@ -247,19 +245,23 @@
             </fieldset>
         </div>
         <div class="search__button">
-            <a class="search__button__submit" [href]="destination_text" name="button"><span>Pesquisar</span></a>
-        </div>
+            <span></span>
+            <a class="search__button__submit" target="_self"
+             [href]="'/busca/voos-resultados#/'+ (origin_iata || 'SAO')  + '/' + (destination_iata || 'RIO') + '/RT/' + startDate.date + '/'+ endDate.date +'/-/-/-/'+ (adultPassenger || 1) +'/'+ (childPassenger || 0) +'/'+ (infantPassenger || 0) +'/-/-/-/-'" name="button"><span>Pesquisar</span></a>
+        </div> 
     </div>
     <!-- Close Search -->
  <!-- Banner -->
  <div class="banner">
         <div class="banner__content">
-            <!-- <amp-ad width="728" height="90"></amp-ad> -->
-
-            <a href="#" target="_blank" class="banner__link">
-                <amp-img src="#" width="728" height="90" alt="Publicidade" class="banner__link__img">
+               <amp-img src="#" width="728" height="90" alt="Publicidade" class="banner__link__img">
                 </amp-img>
-            </a>
+                <amp-ad width=320 height=50
+                    data-override-width=111
+                    data-override-height=222
+                    type="doubleclick"
+                    data-slot="google_ads_iframe_/5204993/one2one_superbanner_0">
+                </amp-ad>
         </div>
     </div>
     <!-- Close Banner -->
