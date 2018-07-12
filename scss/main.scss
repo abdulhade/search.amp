@@ -112,6 +112,7 @@ body {
         .travel {
           &__origin, &__destination {
             float: left;
+            position: relative;
             width: 49%;
             @media screen and (max-width: 767px) {
               width: 100%;
@@ -140,6 +141,30 @@ body {
                 font-size: bold;
               }
             }
+
+            .autosuggest-container {
+              z-index: 9999;
+              position: absolute;
+              background: #fff;
+              color: #055cb1;
+              border-radius: 3px;
+              padding: 10px 5px;
+              width: 97%;
+              font-size: 11px;
+
+              .select-option {
+                padding: 5px 5px;
+                border-bottom: 1px solid #f1f1f1;
+                &:hover, &:focus, &:active {
+                  background: rgba(1, 100, 191,.1);
+                }
+              }
+              &.hidden-origin, &.hidden-destination {
+                display: none;
+              }
+            }
+
+            
           }
 
           &__destination {
@@ -262,6 +287,7 @@ body {
       font-weight: bold;
       padding: 14px 10px;
       text-align: center;
+      text-decoration: none;
       &:hover {
         background: rgba(121, 186, 37, 1);
       }
