@@ -93,9 +93,9 @@
                                    autocomplete="off" />
                                 </label>
                                 <div class="suggest">
-                                    <div class="autosuggest-container hidden-origin" [class]="(showDropdown_origin == true) ?
+                                    <div class="autosuggest-container hidden" [class]="(showDropdown_origin == true) ?
                                         'autosuggest-container' :
-                                        'autosuggest-container hidden-origin'">
+                                        'autosuggest-container hidden'">
                                         <amp-list class="autosuggest-box" layout="fixed-height" height="120" [src]="queryOrigin ?
                                             autosuggest.endpoint + queryOrigin : return" id="autosuggest-list"
                                             items="Locations">
@@ -143,9 +143,9 @@
                                   autocomplete="off" />
                                 </label>
                                 <div class="suggest">
-                                        <div class="autosuggest-container hidden-destination" [class]="(showDropdown_destination == true) ?
+                                        <div class="autosuggest-container hidden" [class]="(showDropdown_destination == true) ?
                                         'autosuggest-container' :
-                                        'autosuggest-container hidden-destination'">
+                                        'autosuggest-container hidden'">
                                         <amp-list class="autosuggest-box" layout="fixed-height" height="120" [src]="queryDestination ?
                                             autosuggest.endpoint + queryDestination : return" id="autosuggest-list"
                                             items="Locations">
