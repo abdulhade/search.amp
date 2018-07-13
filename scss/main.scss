@@ -226,6 +226,7 @@ body {
             @media screen and (max-width: 767px) {
               margin-left: 0;
               width: 100%;
+              float: none;
             }
 
             label {
@@ -430,3 +431,24 @@ amp-date-picker[mode=overlay] .amp-date-picker-calendar-container {
   justify-content: center;
   flex-direction: row;
 } 
+
+// accordion
+
+.opcoes-busca {
+  background: transparent;
+  border: none;
+  margin: 10px 0;
+  width: 137px;
+  padding: 0;
+}
+
+.opcoes-busca:focus {
+  outline: none;
+}
+
+amp-accordion section[expanded] .show-more {
+  display: none;
+}
+amp-accordion section:not([expanded]) .show-less {
+  display: none;
+}
